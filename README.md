@@ -1,1 +1,1 @@
-# kicq
+# kotlin-icq-bot
