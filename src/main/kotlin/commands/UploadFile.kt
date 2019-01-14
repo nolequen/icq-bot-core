@@ -14,19 +14,17 @@ import java.io.FileInputStream
 
 class UploadFile(private val file: File) : Command<String> {
 
-  override suspend fun execute(api: HttpAPI): Result<String> {
-    return api.request<Response>("im/sendFile", HttpMethod.Post) {
-      val stream = FileInputStream(file)
-      body = MultiPartFormDataContent(listOf(PartData.FileItem(
-          { stream.asInput() },
-          {},
-          headersOf(
-              HttpHeaders.ContentDisposition,
-              ContentDisposition.File.withParameter(ContentDisposition.Parameters.FileName, file.name).toString()
-          )
-      )))
-    }.map { it.data.static_url }
-  }
+  override suspend fun execute(api: HttpAPI) = api.request<Response>("im/sendFile", HttpMethod.Post) {
+    val stream = FileInputStream(file)
+    body = MultiPartFormDataContent(listOf(PartData.FileItem(
+        { stream.asInput() },
+        {},
+        headersOf(
+            HttpHeaders.ContentDisposition,
+            ContentDisposition.File.withParameter(ContentDisposition.Parameters.FileName, file.name).toString()
+        )
+    )))
+  }.map { it.data.static_url }
 
   private data class Response(
       val status: Int,

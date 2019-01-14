@@ -8,10 +8,10 @@ class Typing(
     private val status: Status = Status.Typing
 ) : Command<Unit> {
 
-  override suspend fun execute(api: HttpAPI) = api.request<String>("im/setTyping") {
+  override suspend fun execute(api: HttpAPI) = api.request<Unit>("im/setTyping") {
     parameter("t", to)
     parameter("typingStatus", status)
-  }.map { }
+  }
 
   enum class Status {
     Looking,

@@ -5,5 +5,5 @@ import su.nlq.icq.bot.api.HttpAPI
 //todo: replace with Subscription
 class FetchEvents : Command<Unit> {
 
-  override suspend fun execute(api: HttpAPI) = api.request<String>("fetchEvents").map { }
+  override suspend fun execute(api: HttpAPI) = api.request<Unit>("fetchEvents")
 }

@@ -8,14 +8,12 @@ import su.nlq.icq.bot.api.HttpAPI
 
 class Buddies : Command<Collection<Buddies.Buddy>> {
 
-  override suspend fun execute(api: HttpAPI): Result<Collection<Buddy>> {
-    return api.request<Response>("getBuddyList")
-        .map { (json) ->
-          json.data.groups
-              .flatMap { it.buddies }
-              .map { Buddy(it.friendly, it.aimId, api) }
-        }
-  }
+  override suspend fun execute(api: HttpAPI) = api.request<Response>("getBuddyList")
+      .map { (json) ->
+        json.data.groups
+            .flatMap { it.buddies }
+            .map { Buddy(it.friendly, it.aimId, api) }
+      }
 
   private data class Response(
       @JsonProperty("response") val response: Content
@@ -55,10 +53,9 @@ class Buddies : Command<Collection<Buddies.Buddy>> {
 
     suspend fun remove() = remove { parameter("allGroups", 1) }
 
-    private suspend fun remove(parameters: HttpRequestBuilder.() -> Unit) =
-        api.request<String>("/buddylist/removeBuddy", HttpMethod.Post) {
-          parameter("buddy", id)
-          parameters()
-        }.map { }
+    private suspend fun remove(parameters: HttpRequestBuilder.() -> Unit) = api.request<Unit>("/buddylist/removeBuddy", HttpMethod.Post) {
+      parameter("buddy", id)
+      parameters()
+    }
   }
 }
