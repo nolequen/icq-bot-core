@@ -1,18 +1,18 @@
-package su.nlq.icq.bot.commands
+package su.nlq.icq.bot
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
-import su.nlq.icq.bot.api.HttpAPI
+import su.nlq.icq.bot.request.HttpRequest
 
-class Buddies : Command<Collection<Buddies.Buddy>> {
+class Contacts internal constructor(private val bot: Bot) {
 
-  override suspend fun execute(api: HttpAPI) = api.request<Response>("getBuddyList")
+  suspend fun all() = HttpRequest("getBuddyList").request<Response>(bot)
       .map { (json) ->
         json.data.groups
             .flatMap { it.buddies }
-            .map { Buddy(it.friendly, it.aimId, api) }
+            .map { Buddy(it.aimId, it.friendly, bot) }
       }
 
   private data class Response(
@@ -42,20 +42,19 @@ class Buddies : Command<Collection<Buddies.Buddy>> {
       val userType: String
   )
 
-  //todo: types: chat, companion etc.
-  class Buddy(
+  class Buddy internal constructor(
+      id: String,
       val name: String,
-      private val id: String,
-      private val api: HttpAPI
-  ) {
+      private val bot: Bot
+  ) : PenPal(id) {
 
     suspend fun remove(group: String) = remove { parameter("group", group) }
 
     suspend fun remove() = remove { parameter("allGroups", 1) }
 
-    private suspend fun remove(parameters: HttpRequestBuilder.() -> Unit) = api.request<Unit>("/buddylist/removeBuddy", HttpMethod.Post) {
+    private suspend fun remove(parameters: HttpRequestBuilder.() -> Unit) = HttpRequest("/buddylist/removeBuddy", HttpMethod.Post) {
       parameter("buddy", id)
       parameters()
-    }
+    }.request<Unit>(bot)
   }
 }

@@ -1,11 +1,25 @@
 package su.nlq.icq.bot
 
-import su.nlq.icq.bot.api.HttpAPI
-import su.nlq.icq.bot.commands.Command
+import io.ktor.client.HttpClient
+import io.ktor.client.features.json.JacksonSerializer
+import io.ktor.client.features.json.JsonFeature
 
-class Bot(token: String) {
+class Bot(
+    internal val token: String,
+    internal val client: HttpClient = HttpClient {
+      install(JsonFeature) {
+        serializer = JacksonSerializer()
+      }
+    }
+) {
 
-  private val api: HttpAPI = HttpAPI(token)
+  fun conversation(penpal: PenPal) = Conversation(this, penpal)
 
-  internal suspend fun <T> execute(command: Command<T>) = command.execute(api)
+  fun chat(id: String) = Chat(this, id)
+
+  fun files() = Files(this)
+
+  fun contacts() = Contacts(this)
+
+  fun events() = Events(this)
 }
