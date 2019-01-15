@@ -1,12 +1,11 @@
 package su.nlq.icq.bot.commands
 
 import io.ktor.client.request.parameter
-import io.ktor.http.HttpMethod
 import su.nlq.icq.bot.api.HttpAPI
 
 class FileInfo(private val id: String) : Command<String> {
 
-  override suspend fun execute(api: HttpAPI) = api.request<Response>("files/getInfo", HttpMethod.Post) {
+  override suspend fun execute(api: HttpAPI) = api.request<Response>("files/getInfo") {
     parameter("file_id", id)
   }.map { response -> response.file_list.map { it.dlink }.first() }
 

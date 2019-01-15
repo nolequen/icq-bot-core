@@ -1,29 +1,19 @@
 package commands
 
-import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.header
 import io.ktor.http.ContentDisposition
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
-import io.ktor.http.content.PartData
-import io.ktor.http.headersOf
-import kotlinx.io.streams.asInput
+import io.ktor.http.content.LocalFileContent
 import su.nlq.icq.bot.api.HttpAPI
 import su.nlq.icq.bot.commands.Command
 import java.io.File
-import java.io.FileInputStream
 
 class UploadFile(private val file: File) : Command<String> {
 
   override suspend fun execute(api: HttpAPI) = api.request<Response>("im/sendFile", HttpMethod.Post) {
-    val stream = FileInputStream(file)
-    body = MultiPartFormDataContent(listOf(PartData.FileItem(
-        { stream.asInput() },
-        {},
-        headersOf(
-            HttpHeaders.ContentDisposition,
-            ContentDisposition.File.withParameter(ContentDisposition.Parameters.FileName, file.name).toString()
-        )
-    )))
+    header(HttpHeaders.ContentDisposition, ContentDisposition.File.withParameter(ContentDisposition.Parameters.FileName, file.name).toString())
+    body = LocalFileContent(file)
   }.map { it.data.static_url }
 
   private data class Response(

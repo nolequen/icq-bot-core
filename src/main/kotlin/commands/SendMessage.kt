@@ -13,6 +13,6 @@ class SendMessage(
   override suspend fun execute(api: HttpAPI) = api.request<Unit>("im/sendIM", HttpMethod.Post) {
     parameter("t", to)
     parameter("message", message)
-    parameter("mentions", mentions.joinToString())
+    parameter("mentions", mentions.joinToString(","))
   }
 }
