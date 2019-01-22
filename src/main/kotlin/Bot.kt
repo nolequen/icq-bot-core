@@ -3,14 +3,11 @@ package su.nlq.icq.bot
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JacksonSerializer
 import io.ktor.client.features.json.JsonFeature
+import java.time.Duration
 
 class Bot(
     internal val token: String,
-    internal val client: HttpClient = HttpClient {
-      install(JsonFeature) {
-        serializer = JacksonSerializer()
-      }
-    }
+    internal val client: HttpClient = HttpClient { install(JsonFeature) { serializer = JacksonSerializer() } }
 ) {
 
   fun conversation(penpal: PenPal) = Conversation(this, penpal)
@@ -21,5 +18,5 @@ class Bot(
 
   fun contacts() = Contacts(this)
 
-  fun events() = Events(this)
+  fun subscription(timeout: Duration = Duration.ofMinutes(1)) = Subscription(this, timeout)
 }

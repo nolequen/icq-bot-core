@@ -1,5 +1,6 @@
 package su.nlq.icq.bot
 
+import com.fasterxml.jackson.annotation.JsonValue
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
 import su.nlq.icq.bot.request.HttpRequest
@@ -20,11 +21,11 @@ class Conversation internal constructor(
     parameter("typingStatus", status)
   }.request<Unit>(bot)
 
-  enum class Status {
-    Looking,
-    Typing,
-    Typed,
-    None;
+  enum class Status(@get:JsonValue val value: String) {
+    Looking("looking"),
+    Typing("typing"),
+    Typed("typed"),
+    None("none");
   }
 
   suspend fun sticker(sticker: String) = {
