@@ -33,7 +33,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks {
-  "uploadArchives"(Upload::class) {
+  getByName<Upload>("uploadArchives") {
     repositories {
       withConvention(MavenRepositoryHandlerConvention::class) {
         mavenDeployer {
@@ -103,5 +103,5 @@ artifacts {
 }
 
 signing {
-  sign(configurations.archives.get())
+  sign(configurations.archives)
 }
