@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "su.nlq"
-version = "0.0.17"
+version = "1.1.1"
 
 repositories {
   maven("https://kotlin.bintray.com/kotlinx")
@@ -24,6 +24,7 @@ dependencies {
   compile("io.ktor", "ktor-client-jackson", ktorVersion)
 
   testCompile("junit", "junit", "4.12")
+  testCompile("org.hamcrest", "java-hamcrest", "2.0.0.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -55,7 +56,7 @@ tasks {
             withGroovyBuilder {
               "name"("ICQ Bot")
               "description"("ICQ Bot API library")
-              "url"("https://github.com/nolequen/kicq")
+              "url"("https://github.com/nolequen/icq-bot-core")
               "licenses" {
                 "license" {
                   "name"("The MIT License")
@@ -64,7 +65,7 @@ tasks {
                 }
               }
               "scm" {
-                "url"("https://github.com/nolequen/kicq")
+                "url"("https://github.com/nolequen/icq-bot-core")
                 "connection"("scm:git:git://github.com/nolequen/prometheus-protobuf-servlet.git")
                 "developerConnection"("scm:git:ssh://github.com:nolequen/prometheus-protobuf-servlet.git")
               }
