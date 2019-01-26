@@ -54,8 +54,8 @@ tasks {
 
           pom.project {
             withGroovyBuilder {
-              "name"("ICQ Bot")
-              "description"("ICQ Bot API library")
+              "name"("ICQ Bot Core")
+              "description"("ICQ Bot Core API library")
               "url"("https://github.com/nolequen/icq-bot-core")
               "licenses" {
                 "license" {
@@ -66,8 +66,8 @@ tasks {
               }
               "scm" {
                 "url"("https://github.com/nolequen/icq-bot-core")
-                "connection"("scm:git:git://github.com/nolequen/prometheus-protobuf-servlet.git")
-                "developerConnection"("scm:git:ssh://github.com:nolequen/prometheus-protobuf-servlet.git")
+                "connection"("scm:git:git://github.com/nolequen/icq-bot-core.git")
+                "developerConnection"("scm:git:ssh://github.com:nolequen/icq-bot-core.git")
               }
               "developers" {
                 "developer" {
