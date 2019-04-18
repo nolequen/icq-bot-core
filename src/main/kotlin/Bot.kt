@@ -10,7 +10,7 @@ class Bot(
     internal val client: HttpClient = HttpClient { install(JsonFeature) { serializer = JacksonSerializer() } }
 ) {
 
-  fun conversation(penpal: PenPal) = Conversation(this, penpal)
+  fun conversation(penpal: PenPal, wrapThreshold: Int = 5000) = Conversation(this, penpal, wrapThreshold)
 
   fun chat(id: String) = Chat(this, id)
 

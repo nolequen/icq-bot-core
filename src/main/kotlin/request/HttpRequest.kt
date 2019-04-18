@@ -19,14 +19,13 @@ internal class HttpRequest(
     const val base = "https://botapi.icq.net"
   }
 
-  suspend inline fun <reified Result> request(bot: Bot) =
-      bot.client.runCatching {
-        request<Result> {
-          url(URL("$base/$path"))
-          method = httpMethod
-          parameter("r", UUID.randomUUID())
-          parameter("aimsid", bot.token)
-          apply(parameters)
-        }.also { println(it) }
-      }
+  suspend inline fun <reified Result> request(bot: Bot) = bot.client.runCatching {
+    request<Result> {
+      url(URL("$base/$path"))
+      method = httpMethod
+      parameter("r", UUID.randomUUID())
+      parameter("aimsid", bot.token)
+      apply(parameters)
+    }
+  }
 }
