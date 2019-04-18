@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.3.11"
+  kotlin("jvm") version "1.3.21"
   signing
   maven
 }
@@ -103,5 +103,5 @@ artifacts {
 }
 
 signing {
-  sign(configurations.archives)
+  sign(configurations.archives.get())
 }

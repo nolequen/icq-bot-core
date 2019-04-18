@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - oraclejdk11
+sudo: false
+notifications:
+  email: false
+script:
+  - ./gradlew clean build -x signArchives --console=plain
+before_install:
+  - chmod +x gradlew
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
