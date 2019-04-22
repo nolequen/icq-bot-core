@@ -19,15 +19,15 @@ You can find latest release on Maven Central:
 <dependency>
   <groupId>su.nlq</groupId>
   <artifactId>icq-bot-core</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
 * Gradle:
 ```groovy
-implementation 'su.nlq:icq-bot-core:1.1.1'
+implementation 'su.nlq:icq-bot-core:1.2.1'
 ```
 or  
 ```kotlin
-compile("su.nlq:icq-bot-core:1.1.1")
+compile("su.nlq:icq-bot-core:1.2.1")
 ```

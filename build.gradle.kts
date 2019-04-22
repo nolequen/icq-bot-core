@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "su.nlq"
-version = "1.1.1"
+version = "1.2.1"
 
 repositories {
   maven("https://kotlin.bintray.com/kotlinx")
