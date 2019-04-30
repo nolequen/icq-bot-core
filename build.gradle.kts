@@ -24,7 +24,8 @@ dependencies {
   compile("io.ktor", "ktor-client-jackson", ktorVersion)
 
   testCompile("junit", "junit", "4.12")
-  testCompile("org.hamcrest", "java-hamcrest", "2.0.0.0")
+  testCompile("io.ktor", "ktor-client-mock", ktorVersion)
+  testCompile("io.ktor", "ktor-client-mock-jvm", ktorVersion)
 }
 
 tasks.withType<KotlinCompile> {

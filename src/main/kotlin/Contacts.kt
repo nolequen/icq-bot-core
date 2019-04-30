@@ -11,8 +11,9 @@ class Contacts internal constructor(private val bot: Bot) {
   suspend fun all() = HttpRequest("getBuddyList").request<Response>(bot)
       .map { (json) ->
         json.data.groups
-            .flatMap { it.buddies }
-            .map { Buddy(it.aimId, it.friendly, bot) }
+            ?.flatMap { it.buddies }
+            ?.map { Buddy(it.aimId, it.friendly, bot) }
+            ?: emptyList()
       }
 
   private data class Response(
@@ -26,7 +27,7 @@ class Contacts internal constructor(private val bot: Bot) {
   )
 
   private data class RawData(
-      @JsonProperty("groups") val groups: List<RawGroup>
+      @JsonProperty("groups") val groups: List<RawGroup>?
   )
 
   private data class RawGroup(

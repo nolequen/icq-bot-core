@@ -67,7 +67,6 @@ class Subscription internal constructor(
     fun timeout() = Duration.ofMillis(response.data.timeToNextFetch.toLong())
   }
 
-
   private data class Content(
       val statusCode: Int,
       val statusText: String,

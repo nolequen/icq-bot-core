@@ -80,9 +80,9 @@ class Chat internal constructor(
   }
 
   class Event internal constructor(raw: RawMessage) : Message(raw) {
-    val type = raw.chat.memberEvent!!.type;
-    val role = raw.chat.memberEvent!!.role;
-    val members = raw.chat.memberEvent!!.members;
+    val type = raw.chat.memberEvent!!.type
+    val role = raw.chat.memberEvent!!.role
+    val members = raw.chat.memberEvent!!.members
   }
 
   internal data class RawHistory(
@@ -324,7 +324,8 @@ class Chat internal constructor(
   internal data class Person(
       val sn: String,
       val friendly: String,
-      val nick: String
+      val nick: String,
+      val firstName: String?
   )
 
   internal data class RawMember(
@@ -333,7 +334,8 @@ class Chat internal constructor(
       val noAvatar: Boolean?,
       val friendly: String,
       val creator: Boolean,
-      val anketa: Profile
+      val anketa: Profile,
+      val lastseen: String?
   )
 
   internal data class Profile(
