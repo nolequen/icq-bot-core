@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm") version "1.3.21"
+  jacoco
   signing
   maven
 }
@@ -32,6 +33,15 @@ tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "1.8"
   kotlinOptions.freeCompilerArgs = listOf("-Xallow-result-return-type")
 }
+
+tasks.jacocoTestReport {
+  reports {
+    xml.isEnabled = true
+    html.isEnabled = false
+  }
+}
+
+tasks.test { finalizedBy(tasks.jacocoTestReport) }
 
 tasks {
   getByName<Upload>("uploadArchives") {
