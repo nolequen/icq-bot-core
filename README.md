@@ -1,6 +1,7 @@
-# ICQ Bot Core
-[![Build Status](https://travis-ci.org/nolequen/icq-bot-core.svg?branch=master)](https://travis-ci.org/nolequen/icq-bot-core)
+# ICQ Bot Core                                                                                                 
 [![Maven Central](https://img.shields.io/maven-central/v/su.nlq/icq-bot-core.svg)](https://maven-badges.herokuapp.com/maven-central/su.nlq/icq-bot-core)
+[![Build Status](https://travis-ci.org/nolequen/icq-bot-core.svg?branch=master)](https://travis-ci.org/nolequen/icq-bot-core)
+[![Codecov](https://codecov.io/gh/nolequen/icq-bot-core/branch/master/graph/badge.svg)](https://codecov.io/gh/nolequen/icq-bot-core)
 [![Codebeat](https://codebeat.co/badges/22ab4de3-4f09-44ab-9219-d9e044f58a21)](https://codebeat.co/a/nolequen/projects/github-com-nolequen-icq-bot-core-master)
 
 Easy interface to ICQ Bot API powered by Kotlin.
